@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{9CB76D00-AC99-4FF7-BF79-6277D80D3A26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threading", "Threading\Threading.csproj", "{FC753212-4C6F-453A-AB1A-5BE190B2F12A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAsyncAwaitDemo", "WpfAsyncAwaitDemo\WpfAsyncAwaitDemo.csproj", "{6F790C4C-ECB8-44D3-926B-963651CF3A54}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{9CB76D00-AC99-4FF7-BF79-6277D80D3A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CB76D00-AC99-4FF7-BF79-6277D80D3A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CB76D00-AC99-4FF7-BF79-6277D80D3A26}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FC753212-4C6F-453A-AB1A-5BE190B2F12A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FC753212-4C6F-453A-AB1A-5BE190B2F12A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FC753212-4C6F-453A-AB1A-5BE190B2F12A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FC753212-4C6F-453A-AB1A-5BE190B2F12A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6F790C4C-ECB8-44D3-926B-963651CF3A54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6F790C4C-ECB8-44D3-926B-963651CF3A54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F790C4C-ECB8-44D3-926B-963651CF3A54}.Release|Any CPU.ActiveCfg = Release|Any CPU
