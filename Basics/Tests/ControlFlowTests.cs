@@ -1,8 +1,5 @@
 ﻿using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Runtime.ExceptionServices;
@@ -13,74 +10,116 @@ namespace Tests
     public class ControlFlowTests
     {
         [Test]
-        public void Todo()
+        public void Using_TwoVariablesWithinFor()
         {
-            for (int i = 0, j = 15; i < 15 && j > 0; i += 2, j--)
+            var sum = 0;
+
+            for (int i = 0, j = 3; i < 15 && j > 0; i += 2, j--)
             {
-                if (i == 6)
+                if (i == 4)
                     continue;
-                if (j == 13)
+                if (j == 1)
                     break;
-                Console.WriteLine(i + j);
+                sum += i + j;
             }
 
+            Assert.AreEqual(7, sum);
+        }
+
+        [Test]
+        public void Using_SwitchAndGoTo()
+        {
+            var result = string.Empty;
             var ch = 'c';
 
+            labelBeforeSwitch:
             switch (ch)
             {
                 case 'a':
                 case 'b':
-                    {   // does this look better with curly braces?
-                        Console.WriteLine("a or b");
-                        break;
-                    }
+                    result = "a or b";
+                    break;
                 case 'c':
-                    Console.WriteLine("case c");
+                    result = "case c";
                     goto default;
-                //break;
                 default:
-                    Console.WriteLine("default");
+                    result = "default";
                     break;
             }
 
+            if (ch == 'c')
+            {
+                Assert.AreEqual("default", result);
+                ch = 'b';
+                goto labelBeforeSwitch;
+            }
+
+            Assert.AreEqual("a or b", result);
+        }
+
+        [Test]
+        public void Using_ChainedNullCoalescingOperator()
+        {
             int? nullableInt1 = null;
             int? nullableInt2 = null;
-            Console.WriteLine(nullableInt1 ?? nullableInt2 ?? -10); // null-coalescing operator (chained)
+            Assert.AreEqual(-10, 
+                nullableInt1 ?? nullableInt2 ?? -10);
+        }
 
-            goto label;
-            Console.WriteLine("not written"); // unreachable
-            label:
-            Console.WriteLine("written");
-
+        [Test]
+        public void Using_InfiniteFor()
+        {
             bool isStopped = false;
             Task.Run(() =>
             {
-                Console.WriteLine("press any key to stop");
-                Console.ReadKey();
+                Thread.Sleep(60);
                 isStopped = true;
             });
 
+            var count = 0;
+
             for (;;)
             {
-                Console.Write("*");
-                Thread.Sleep(500);
+                count++;
+                Thread.Sleep(40);
                 if (isStopped)
-                {
-                    Console.WriteLine();
                     break;
-                }
             }
 
-            var captured = ExceptionDispatchInfo.Capture(new Exception("some exception"));
-            // captured.Throw(); // throws as good as await (preserving the original info)
+            Assert.AreEqual(2, count);
+        }
 
+        [Test]
+        public void Using_ExceptionDispatchInfo()
+        {            
+            var ex = Assert.Throws<Exception>(() => GetExceptionDispatchInfo().Throw());
+            Assert.IsTrue(ex.StackTrace.Contains("GetExceptionDispatchInfo")); // still contains info about initial place of throw
+            Assert.IsTrue(ex.StackTrace.Contains("Using_ExceptionDispatchInfo")); // contains info about the second place of throw
+        }
+
+        private ExceptionDispatchInfo GetExceptionDispatchInfo()
+        {
+            try
+            {
+                throw new Exception("some exception");
+            }
+            catch (Exception ex)
+            {
+                return ExceptionDispatchInfo.Capture(ex);                
+            }            
+        }
+
+        [Test]
+        [Explicit("This one is just to remember the FailFast method")]
+        public void Using_EnvironmentFailFast()
+        {
             try
             {
                 Environment.FailFast("failing fast");
             }
             finally
             {
-                Console.WriteLine("finally"); // not written to Console
+                Assert.Fail(); // not executed
             }
         }
     }
