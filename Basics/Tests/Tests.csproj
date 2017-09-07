@@ -46,7 +46,10 @@
   <ItemGroup>
     <Compile Include="DelegatesTests.cs" />
     <Compile Include="ControlFlowTests.cs" />
+    <Compile Include="ExampleClass.cs" />
+    <Compile Include="IExampleInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflectionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
